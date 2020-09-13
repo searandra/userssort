@@ -15,7 +15,7 @@ class Controller extends BaseController
 
 
     public function index(){
-    	$users = \App\User::orderBy('order')->orderBy('updated_at', 'desc')->get();
+    	$users = \App\User::orderBy('order')->get();
     	return view('welcome', compact('users'));
     }
 
@@ -25,11 +25,11 @@ class Controller extends BaseController
 
     	$user = \App\User::where('id', $user_id)->first();
     	if(!empty($user)){
-    		$user->order = ++$index;
+    		$user->order = $index ;
     		$user->save();
     	}
 
-    	$otherUsers = \App\User::where('order', '>=', $index)->where('id', '!=', $user_id)->get();
+    	$otherUsers = \App\User::where('order', '>=', $index)->where('id', '!=', $user_id)->orderBy('order')->get();
     	foreach ($otherUsers as $user) {
     		$user->order = ++$index ;
     		$user->save();

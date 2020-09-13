@@ -111,12 +111,7 @@
     </head>
     <body>
         <h1>Users</h1>
-
-        <div class="layout">
-          <label><input id="mixed" name="layout" type="radio" value="mixed" checked=""/> Mixed Tile Size</label>
-          <label><input id="fixed" name="layout" type="radio" value="fixed"/> Fixed Tile Size</label>
-          <label><input id="column" name="layout" type="radio" value="column"/> Single Column</label>
-        </div>
+        
         <div id="list">
         </div>
 
