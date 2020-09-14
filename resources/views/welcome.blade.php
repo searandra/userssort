@@ -4,7 +4,7 @@
         <title>Laravel</title>
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <style>
             html {
               font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
@@ -107,6 +107,76 @@
                 z-index: 999999;
                 padding-bottom: 10px; 
             }
+            .modal.show .modal-dialog {
+                max-width: 90%;
+            }
+            .text-center {
+                text-align: center!important;
+                width: 100%;
+            }
+            .dashboard_content {
+                background: #F5F5FB;
+                display: block;
+                position: relative;
+                padding: 3rem 1rem;
+                height: 500px;
+                width: 100%;
+                border-radius: 30px;
+            }
+            .coverImg img {
+                display: flex;
+                position: relative;
+                /* min-height: 415px; */
+                height: auto;
+                border-radius: 20px;
+                margin-bottom: 30px;
+                align-items: flex-end;
+            }
+            .profile_image_section {
+                position: relative;
+                height: auto;
+                border-radius: 20px;
+                margin-bottom: 30px;
+                align-items: flex-end;
+            }
+            .profile_image_section .profile_picture {
+                width: 150px;
+                height: 150px;
+                display: block;
+                position: absolute;
+                right: 80px;
+                bottom: 170px;
+                top: 30%;
+            }
+            .profile_image_section .profile_picture img {
+                width: 100%;
+                border-radius: 50%;
+            }
+            .profile_image_section .profile_content {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                position: relative;
+                background: #fff;
+                padding: 20px;
+                width: 100%;
+                min-height: 140px;
+                height: 140px;
+                border-bottom-left-radius: 18px;
+                border-bottom-right-radius: 18px;
+                align-items: center;
+                justify-content: flex-start;
+            }
+            .profile_box {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                align-items: center;
+                width: 50%;
+            }
+            .profile_box img{
+                width: 100px;
+            }
         </style>
     </head>
     <body>
@@ -116,12 +186,96 @@
         </div>
 
 
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/utils/Draggable.min.js"></script>
-        <script type="text/javascript">
+<div class="modal" tabindex="-1" role="dialog" id="user-details">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-center">User Information</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <section class="page_wrapper dashboard-layout" id="dashboard">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Dashboard content starts here -->
+                    <div class="col-md-12 col-12 change-width" id="user-profile-public">
+                        <div class="dashboard_content" id="dashboard-content">
+                            <div class="profile_inner-content-dashboard">
+                                <div class="profile-view-mobile">
+                                    <div class="profile_image_section">
+                                        <div class="coverImg">
+                                
+                                            <div class="image-upload">
+                                                <label for="input_file" class="img-wrapper" style="width: 100%;">
+                                                <img style="width: 100%;height: 240px;" src="images/profile-bg.png" alt="connection image">
+                                                </label>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="profile_picture">  
+                                            <img src="images/default.png" alt="connection image">
+                                        </div>
+
+
+                                        <div class="profile_content">
+                                            
+                                            <div class="profile_box">
+                                                <div class="profile_img">
+                                                    <img src="/images/userdefault.png" alt="">
+                                                </div>
+                                                <div class="profile_single_content">
+                                                    <h3 id="user-name"></h3>
+                                                </div>
+                                            </div>
+                                            <div class="profile_box">
+                                                <div class="profile_img">
+                                                    <img src="/images/phone.jpeg" alt="" style="width: 85px;">
+                                                </div>
+                                                <div class="profile_single_content">
+                                                    <h3 id="user-phone-number">0</h3>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+
+
+                                    </div>
+                                </div>
+               
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Dashboard content ends here -->
+                </div>
+            </div>
+            <!-- End of Endorsement form Modal -->
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/utils/Draggable.min.js"></script>       
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
            
-            
+     
+ $(document).on('click','.user-details', function(){
+    
+    $('#user-name').text($(this).attr('name'));
+    $('#user-phone-number').text($(this).attr('phone'));
+    $('#user-details').modal('toggle');
+ });
+
+
 // GRID OPTIONS
 var rowSize   = 100;
 var colSize   = 100;
@@ -250,8 +404,8 @@ function changePosition(from, to, rowToUpdate) {
 function createTile(id='0' ,name='',image='',phoneNumber='') {
 
     var colspan = 2;
-    var html = '<div class="user-details"><div class="image"> <img src="images/default.png"></div>'+
-                '<div class="details-info"><p><a href="#">'+name+'</a></p>'+
+    var html = '<div class="user-details" name="'+name+'" phone="'+phoneNumber+'"><div class="image"> <img src="images/default.png"></div>'+
+                '<div class="details-info"><p>'+name+'</p>'+
                 '<p>'+phoneNumber+'</p></div></div>';
 
     var element = $("<div></div>").addClass("tile").attr('userid',id).html(html);
