@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
-use Request;
+use Illuminate\Http\Request;
 
 class Controller extends BaseController
 {
@@ -15,26 +15,23 @@ class Controller extends BaseController
 
 
     public function index(){
-    	$users = \App\User::orderBy('order')->get();
+    	$users = \App\User::orderBy('coordinate_x')->orderBy('coordinate_y')->get();
     	return view('welcome', compact('users'));
     }
 
     public function updateuserorder(Request $request){
-    	$index = $_POST['index'];
-    	$user_id = $_POST['user_id'];
-
-    	$user = \App\User::where('id', $user_id)->first();
-    	if(!empty($user)){
-    		$user->order = $index ;
-    		$user->save();
+    	$inputs = $request->all();
+    	foreach ($inputs['tile_pos'] as $key => $input) {
+    		if(is_array($input)){
+    			$user = \App\User::where('id', $key)->first();
+    			if (!empty($user)) {
+    				$user->coordinate_x = $input['top'];
+    				$user->coordinate_y = $input['left'];
+    				$user->save();
+    			}
+    		}
     	}
-
-    	$otherUsers = \App\User::where('order', '>=', $index)->where('id', '!=', $user_id)->orderBy('order')->get();
-    	foreach ($otherUsers as $user) {
-    		$user->order = ++$index ;
-    		$user->save();
-    	}
-
+    	
     	return response()->json(['success'=>true, 'message'=>'Order updated']);
     }
 

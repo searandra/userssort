@@ -61,6 +61,7 @@
               position: relative;
               display: block;
               margin-top: 50px;
+              padding: 20px;
             }
 
             .tile {
@@ -100,10 +101,10 @@
                 transition: 1s ease;
             }
             .user-details:hover{
-                -webkit-transform: scale(1.2);
+                /*-webkit-transform: scale(1.2);
                 -ms-transform: scale(1.2);
                 transform: scale(1.2);
-                transition: 1s ease;
+                transition: 1s ease;*/
                 z-index: 999999;
                 padding-bottom: 10px; 
             }
@@ -494,7 +495,7 @@ function createTile(id='0' ,name='',image='',phoneNumber='') {
 
         // Move tile back to last position if released out of bounds
         this.hitTest($list, 0)
-            ? layoutInvalidated()
+            ? layoutInvalidated(-1)
         : changePosition(tile.index, tile.lastIndex);
 
         TweenLite.to(element, 0.2, {
@@ -504,16 +505,6 @@ function createTile(id='0' ,name='',image='',phoneNumber='') {
             x         : tile.x,
             y         : tile.y,
             zIndex    : ++zIndex
-        });
-
-        var token = $('meta[name="csrf-token"').attr('content');
-
-        $.ajax({
-            method:'post',
-            url: "updateuserorder",
-            data:{user_id:tile.user, index:tile.index, _token:token},
-        }).done(function() {
-          
         });
 
         tile.isDragging = false;
@@ -532,6 +523,7 @@ function layoutInvalidated(rowToUpdate) {
     var col    = 0;
     var row    = 0;
     var time   = 0.35;
+    tile_pos = [];
 
     $(".tile").each(function(index, element) {
 
@@ -617,14 +609,39 @@ function layoutInvalidated(rowToUpdate) {
                 onStart    : function() { tile.positioned = false; }
             }, "reflow");
         }
+        var userId = $(this).attr('userid');
+        var this_ = this;
+
+        setTimeout(function(){
+            var position = $(this_).position() ;
+            tile_pos[userId] = position;
+        },500);
+        // tile_pos[userId]['x'] = position.left;
+        // tile_pos[userId]['y'] = position.top;
     });
+
+    if(typeof rowToUpdate != 'undefined'){
+        console.log(tile_pos);
+        var token = $('meta[name="csrf-token"').attr('content');
+        setTimeout(function(){
+            $.ajax({
+                method:'post',
+                url: "updateuserorder",
+                data:{tile_pos:tile_pos, _token:token},
+            }).done(function() {
+              
+            });
+        },1000);
+    }else{
+        console.log('dras');
+    }
 
     if (!row) rowCount = 1;
 
     // If the row count has changed, change the height of the container
     if (row !== rowCount) {
         rowCount = row;
-        height   = rowCount * gutterStep + (++row * rowSize);
+        height   = rowCount * gutterStep + (++row * rowSize) +45;
         timeline.to($list, 0.2, { height: height }, "reflow");
     }
 }

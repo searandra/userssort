@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 14, 2020 at 09:30 PM
+-- Generation Time: Sep 15, 2020 at 09:30 PM
 -- Server version: 5.5.62-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.29
 
@@ -66,7 +66,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `phone_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `order` int(11) NOT NULL,
+  `coordinate_x` int(11) DEFAULT NULL,
+  `coordinate_y` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -77,19 +78,19 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone_number`, `remember_token`, `order`, `created_at`, `updated_at`) VALUES
-(1, 'User1', 'user@test.com', '', '1234567890', NULL, 2, NULL, '2020-09-14 10:00:03'),
-(9, 'User2', 'user2@test.com', '', '1234567890', NULL, 3, NULL, '2020-09-14 10:00:03'),
-(10, 'User3', 'user3@test.com', '', '1234567890', NULL, 4, NULL, '2020-09-14 10:00:03'),
-(11, 'User4', 'user4@test.com', '', '1234567890', NULL, 5, NULL, '2020-09-14 10:00:03'),
-(12, 'User5', 'user5@test.com', '', '1234567890', NULL, 1, NULL, '2020-09-14 10:00:02'),
-(13, 'User6', 'user6@test.com', '', '1234567890', NULL, 6, NULL, '2020-09-14 10:00:01'),
-(14, 'User7', 'user7@test.com', '', '1234567890', NULL, 0, NULL, '2020-09-14 10:00:00'),
-(15, 'User8', 'user8@test.com', '', '1234567890', NULL, 7, NULL, '2020-09-13 08:44:27'),
-(16, 'User9', 'user9@test.com', '', '1234567890', NULL, 8, NULL, '2020-09-13 08:44:27'),
-(17, 'User10', 'user10@test.com', '', '1234567890', NULL, 9, NULL, '2020-09-13 08:44:27'),
-(18, 'User11', 'user11@test.com', '', '1234567890', NULL, 10, NULL, '2020-09-13 08:44:27'),
-(19, 'User12', 'user12@test.com', '', '1234567890', NULL, 11, NULL, '2020-09-13 08:44:27');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone_number`, `remember_token`, `coordinate_x`, `coordinate_y`, `created_at`, `updated_at`) VALUES
+(1, 'User1', 'user@test.com', '', '1234567890', NULL, 126, 233, NULL, '2020-09-15 10:29:44'),
+(9, 'User2', 'user2@test.com', '', '1234567890', NULL, 126, 658, NULL, '2020-09-15 10:29:44'),
+(10, 'User3', 'user3@test.com', '', '1234567890', NULL, 233, 20, NULL, '2020-09-15 10:29:44'),
+(11, 'User4', 'user4@test.com', '', '1234567890', NULL, 126, 20, NULL, '2020-09-15 10:29:44'),
+(12, 'User5', 'user5@test.com', '', '1234567890', NULL, 233, 233, NULL, '2020-09-15 10:29:44'),
+(13, 'User6', 'user6@test.com', '', '1234567890', NULL, 126, 445, NULL, '2020-09-15 10:29:44'),
+(14, 'User7', 'user7@test.com', '', '1234567890', NULL, 126, 871, NULL, '2020-09-15 10:29:44'),
+(15, 'User8', 'user8@test.com', '', '1234567890', NULL, 20, 233, NULL, '2020-09-15 10:29:44'),
+(16, 'User9', 'user9@test.com', '', '1234567890', NULL, 20, 20, NULL, '2020-09-15 10:29:42'),
+(17, 'User10', 'user10@test.com', '', '1234567890', NULL, 20, 871, NULL, '2020-09-15 10:29:44'),
+(18, 'User11', 'user11@test.com', '', '1234567890', NULL, 20, 445, NULL, '2020-09-15 10:29:44'),
+(19, 'User12', 'user12@test.com', '', '1234567890', NULL, 20, 658, NULL, '2020-09-15 10:29:44');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
